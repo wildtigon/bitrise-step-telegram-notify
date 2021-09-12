@@ -21,9 +21,10 @@ set -ex
 #  with a 0 exit code `bitrise` will register your Step as "successful".
 # Any non zero exit code will be registered as "failed" by `bitrise`.
 
-MESSAGE="🛑 *$BITRISE_APP_TITLE*: build $BITRISE_BUILD_NUMBER failed 😕 \nURL: $BITRISE_APP_URL\nCommit: $BITRISE_GIT_COMMIT - $BITRISE_GIT_MESSAGE \n\n $custom_message"
+BITRISE_GIT_COMMIT_LIMITED=${BITRISE_GIT_COMMIT:0:8}
+MESSAGE="🛑 *$BITRISE_APP_TITLE*: build $BITRISE_BUILD_NUMBER failed 😕 \nURL: $BITRISE_APP_URL\nCommit: $BITRISE_GIT_COMMIT_LIMITED - $BITRISE_GIT_MESSAGE \n\n $custom_message"
 
-if [ $BITRISE_BUILD_STATUS -eq 0 ] ; then MESSAGE="✅ <b>$BITRISE_APP_TITLE</b> #$BITRISE_BUILD_NUMBER passed! 🎉\nCommit: $BITRISE_GIT_COMMIT -- $BITRISE_GIT_MESSAGE\nDownload URL: $download_url \n$custom_message" ; fi
+if [ $BITRISE_BUILD_STATUS -eq 0 ] ; then MESSAGE="✅ <b>$BITRISE_APP_TITLE</b> #$BITRISE_BUILD_NUMBER passed! 🎉\nCommit: $BITRISE_GIT_COMMIT_LIMITED -- $BITRISE_GIT_MESSAGE\nDownload URL: $download_url \n$custom_message" ; fi
 
 payload="{ \"chat_id\": \"'${telegram_chat_id}'\", \"text\":\"$MESSAGE\", \"parse_mode\": \"HTML\" }"
 
