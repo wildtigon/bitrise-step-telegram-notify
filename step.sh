@@ -22,9 +22,9 @@ set -ex
 # Any non zero exit code will be registered as "failed" by `bitrise`.
 
 BITRISE_GIT_COMMIT_LIMITED=${BITRISE_GIT_COMMIT:0:8}
-MESSAGE="🛑 *$BITRISE_APP_TITLE*: build $BITRISE_BUILD_NUMBER failed 😕 \nURL: $BITRISE_APP_URL\nCommit: $BITRISE_GIT_COMMIT_LIMITED - $BITRISE_GIT_MESSAGE \n\n $custom_message"
+MESSAGE="🛑 <b>$BITRISE_APP_TITLE</b> Checking merge request failed"
 
-if [ $BITRISE_BUILD_STATUS -eq 0 ] ; then MESSAGE="✅ <b>$BITRISE_APP_TITLE</b> #$BITRISE_BUILD_NUMBER passed! 🎉\nCommit: $BITRISE_GIT_COMMIT_LIMITED -- $BITRISE_GIT_MESSAGE\n$custom_message" ; fi
+if [ $BITRISE_BUILD_STATUS -eq 0 ] ; then MESSAGE="✅ <b>$BITRISE_APP_TITLE</b> Merge request is ready to merge" ; fi
 
 payload="{ \"chat_id\": \"'${telegram_chat_id}'\", \"text\":\"$MESSAGE\", \"parse_mode\": \"HTML\" }"
 
